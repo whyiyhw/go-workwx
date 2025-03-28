@@ -210,6 +210,25 @@ func (c *WorkwxApp) SendTaskCardMessage(
 	)
 }
 
+// SendMiniprogramMessage
+func (c *WorkwxApp) SendMiniprogramMessage(
+	recipient *Recipient,
+	appid, title, thumb_media_id, pagepath string,
+	isSafe bool,
+) error {
+	return c.sendMessage(
+		recipient,
+		"miniprogram",
+		map[string]interface{}{
+			"appid":          appid,
+			"title":          title,
+			"thumb_media_id": thumb_media_id,
+			"pagepath":       pagepath,
+		},
+		isSafe,
+	)
+}
+
 // sendMessage 发送消息底层接口
 //
 // 收件人参数如果仅设置了 `ChatID` 字段，则为【发送消息到群聊会话】接口调用；
